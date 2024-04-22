@@ -66,65 +66,70 @@ private fun GridCell(color: Color, row: Int, column: Int, width: Int? = null, he
 @Page
 @Composable
 fun HomePage() {
-    PageLayout("Home") {
-        Row(HeroContainerStyle.toModifier()) {
-            Box {
-                val sitePalette = ColorMode.current.toSitePalette()
-
-                Column(Modifier.gap(2.cssRem)) {
-                    Div(HeadlineTextStyle.toAttrs()) {
-                        SpanText(
-                            "Use this template as your starting point for ", Modifier.color(
-                                when (ColorMode.current) {
-                                    ColorMode.LIGHT -> Colors.Black
-                                    ColorMode.DARK -> Colors.White
-                                }
-                            )
-                        )
-                        SpanText(
-                            "Kobweb",
-                            Modifier
-                                .color(sitePalette.brand.accent)
-                                // Use a shadow so this light-colored word is more visible in light mode
-                                .textShadow(0.px, 0.px, blurRadius = 0.5.cssRem, color = Colors.Gray)
-                        )
-                    }
-
-                    Div(SubheadlineTextStyle.toAttrs()) {
-                        SpanText("You can read the ")
-                        Link("/about", "About")
-                        SpanText(" page for more information.")
-                    }
-
-                    val ctx = rememberPageContext()
-                    Button(onClick = {
-                        // Change this click handler with your call-to-action behavior
-                        // here. Link to an order page? Open a calendar UI? Play a movie?
-                        // Up to you!
-                        ctx.router.tryRoutingTo("/about")
-                    }, colorScheme = ColorSchemes.Blue) {
-                        Text("This could be your CTA")
-                    }
-                }
-            }
-
-            Div(HomeGridStyle
-                .toModifier()
-                .displayIfAtLeast(Breakpoint.MD)
-                .grid {
-                    rows { repeat(3) { size(1.fr) } }
-                    columns { repeat(5) {size(1.fr) } }
-                }
-                .toAttrs()
-            ) {
-                val sitePalette = ColorMode.current.toSitePalette()
-                GridCell(sitePalette.brand.primary, 1, 1, 2, 2)
-                GridCell(ColorSchemes.Monochrome._600, 1, 3)
-                GridCell(ColorSchemes.Monochrome._100, 1, 4, width = 2)
-                GridCell(sitePalette.brand.accent, 2, 3, width = 2)
-                GridCell(ColorSchemes.Monochrome._300, 2, 5)
-                GridCell(ColorSchemes.Monochrome._800, 3, 1, width = 5)
-            }
-        }
-    }
+    println("Hello world!")
 }
+
+
+//An example by library authors for tests
+
+//    PageLayout("Home") {
+//        Row(HeroContainerStyle.toModifier()) {
+//            Box {
+//                val sitePalette = ColorMode.current.toSitePalette()
+//
+//                Column(Modifier.gap(2.cssRem)) {
+//                    Div(HeadlineTextStyle.toAttrs()) {
+//                        SpanText(
+//                            "Use this template as your starting point for ", Modifier.color(
+//                                when (ColorMode.current) {
+//                                    ColorMode.LIGHT -> Colors.Black
+//                                    ColorMode.DARK -> Colors.White
+//                                }
+//                            )
+//                        )
+//                        SpanText(
+//                            "Kobweb",
+//                            Modifier
+//                                .color(sitePalette.brand.accent)
+//                                // Use a shadow so this light-colored word is more visible in light mode
+//                                .textShadow(0.px, 0.px, blurRadius = 0.5.cssRem, color = Colors.Gray)
+//                        )
+//                    }
+//
+//                    Div(SubheadlineTextStyle.toAttrs()) {
+//                        SpanText("You can read the ")
+//                        Link("/about", "About")
+//                        SpanText(" page for more information.")
+//                    }
+//
+//                    val ctx = rememberPageContext()
+//                    Button(onClick = {
+//                        // Change this click handler with your call-to-action behavior
+//                        // here. Link to an order page? Open a calendar UI? Play a movie?
+//                        // Up to you!
+//                        ctx.router.tryRoutingTo("/about")
+//                    }, colorScheme = ColorSchemes.Blue) {
+//                        Text("This could be your CTA")
+//                    }
+//                }
+//            }
+//
+//            Div(HomeGridStyle
+//                .toModifier()
+//                .displayIfAtLeast(Breakpoint.MD)
+//                .grid {
+//                    rows { repeat(3) { size(1.fr) } }
+//                    columns { repeat(5) {size(1.fr) } }
+//                }
+//                .toAttrs()
+//            ) {
+//                val sitePalette = ColorMode.current.toSitePalette()
+//                GridCell(sitePalette.brand.primary, 1, 1, 2, 2)
+//                GridCell(ColorSchemes.Monochrome._600, 1, 3)
+//                GridCell(ColorSchemes.Monochrome._100, 1, 4, width = 2)
+//                GridCell(sitePalette.brand.accent, 2, 3, width = 2)
+//                GridCell(ColorSchemes.Monochrome._300, 2, 5)
+//                GridCell(ColorSchemes.Monochrome._800, 3, 1, width = 5)
+//            }
+//        }
+//    }
