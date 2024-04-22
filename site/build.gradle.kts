@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown)
+    alias(libs.plugins.serialization.plugin)
 }
 
 group = "com.dev.agalperin.blogmultiplatform"
@@ -41,11 +42,15 @@ kotlin {
             // Uncomment the following if you want access to a large set of font-awesome icons:
             // implementation(libs.silk.icons.fa)
             implementation(libs.kobwebx.markdown)
+            implementation(libs.kotlinx.serialization)
         }
 
         // Uncomment the following if you pass `includeServer = true` into the `configAsKobwebApplication` call.
         jvmMain.dependencies {
-            compileOnly(libs.kobweb.api) // Provided by Kobweb backend at runtime
+            implementation(libs.kobweb.api)
+            implementation(libs.kmongo.database)
+            implementation(libs.kotlinx.serialization)
+        // Provided by Kobweb backend at runtime
         }
     }
 }

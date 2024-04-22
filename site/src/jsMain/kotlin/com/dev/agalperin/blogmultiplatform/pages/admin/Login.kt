@@ -5,7 +5,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.dev.agalperin.blogmultiplatform.models.Theme
 import com.dev.agalperin.blogmultiplatform.styles.LoginInputStyle
 import com.dev.agalperin.blogmultiplatform.util.Constants.FONT_FAMILY
 import com.dev.agalperin.blogmultiplatform.util.Res
