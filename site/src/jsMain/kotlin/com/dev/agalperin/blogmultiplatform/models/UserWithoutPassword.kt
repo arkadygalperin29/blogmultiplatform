@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 actual data class UserWithoutPassword(
     @SerialName(value = "_id")
-    actual val id: String = "",
+    actual val _id: String = "",
     actual val userName: String = "",
 )

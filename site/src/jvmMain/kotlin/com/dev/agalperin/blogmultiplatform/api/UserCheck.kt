@@ -20,7 +20,7 @@ suspend fun userCheck(context: ApiContext) {
         val user = userRequest?.let {
             context.data.getValue<MongoDB>().checkUserExistence(
                 User(
-                    userName = it.userName,
+                    username = it.username,
                     password = hashPassword(it.password)
                 )
             )
@@ -29,17 +29,17 @@ suspend fun userCheck(context: ApiContext) {
             context.res.setBodyText(
                 Json.encodeToString(
                     UserWithoutPassword(
-                        id = user.id,
-                        userName = user.userName
+                        _id = user._id,
+                        userName = user.username
                     )
                 )
             )
         } else {
-            context.res.setBodyText(Json.encodeToString(Exception("User doesn't exist")))
+            context.res.setBodyText(Json.encodeToString("User doesn't exist"))
         }
 
     } catch (e: Exception) {
-        context.res.setBodyText(Json.encodeToString(Exception(e.message)))
+        context.res.setBodyText(Json.encodeToString(e.message))
     }
 }
 

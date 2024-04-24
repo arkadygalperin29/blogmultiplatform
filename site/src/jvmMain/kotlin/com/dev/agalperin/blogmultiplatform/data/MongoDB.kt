@@ -2,20 +2,21 @@ package com.dev.agalperin.blogmultiplatform.data
 
 import com.dev.agalperin.blogmultiplatform.models.User
 import com.dev.agalperin.blogmultiplatform.util.Constants.DATABASE_NAME
+import com.mongodb.client.model.Filters
 import com.varabyte.kobweb.api.data.add
 import com.varabyte.kobweb.api.init.InitApi
 import com.varabyte.kobweb.api.init.InitApiContext
-import kotlinx.coroutines.reactive.awaitFirst
-import org.litote.kmongo.and
-import org.litote.kmongo.eq
+import kotlinx.coroutines.reactive.awaitFirstOrNull
 import org.litote.kmongo.reactivestreams.KMongo
 import org.litote.kmongo.reactivestreams.getCollection
-import org.litote.kmongo.service.ClassMappingTypeService
 
 @InitApi
-fun initMongoDB(context: InitApiContext) {
-    System.setProperty("org.litote.mongo.mapping.service", "org.litote.kmongo.serialization.SerializationClassMappingTypeService")
-    context.data.add(MongoDB(context))
+fun initMongoDB(ctx: InitApiContext) {
+    System.setProperty(
+        "org.litote.mongo.mapping.service",
+        "org.litote.kmongo.serialization.SerializationClassMappingTypeService"
+    )
+    ctx.data.add(MongoDB(ctx))
 }
 
 class MongoDB(private val context: InitApiContext) : MongoRepository {
@@ -25,12 +26,13 @@ class MongoDB(private val context: InitApiContext) : MongoRepository {
     private val userCollection = database.getCollection<User>()
     override suspend fun checkUserExistence(user: User): User? {
         return try {
-            userCollection.find(
-                and(
-                    User::userName eq user.userName,
-                    User::password eq user.password
-                )
-            ).awaitFirst()
+            userCollection
+                .find(
+                    Filters.and(
+                        Filters.eq(User::username.name, user.username),
+                        Filters.eq(User::password.name, user.password)
+                    )
+                ).awaitFirstOrNull()
         } catch (e: Exception) {
             context.logger.error(e.message.toString())
             null

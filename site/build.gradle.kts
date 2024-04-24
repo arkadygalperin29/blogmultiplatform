@@ -20,7 +20,7 @@ kobweb {
 
         // Only legacy sites need this set. Sites built after 0.16.0 should default to DISALLOW.
         // See https://github.com/varabyte/kobweb#legacy-routes for more information.
-        legacyRouteRedirectStrategy.set(LegacyRouteRedirectStrategy.DISALLOW)
+//        legacyRouteRedirectStrategy.set(LegacyRouteRedirectStrategy.DISALLOW)
     }
 }
 
@@ -32,12 +32,14 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
+            implementation(libs.kotlinx.serialization)
         }
 
         jsMain.dependencies {
             implementation(compose.html.core)
             implementation(libs.kobweb.core)
-            implementation(libs.kobweb.silk)
+            implementation(libs.kobweb.silk.core)
+            implementation(libs.kobweb.silk.icons.fa)
             // This default template uses built-in SVG icons, but what's available is limited.
             // Uncomment the following if you want access to a large set of font-awesome icons:
             // implementation(libs.silk.icons.fa)

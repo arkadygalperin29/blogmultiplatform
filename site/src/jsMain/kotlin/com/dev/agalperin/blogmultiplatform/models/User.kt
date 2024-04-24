@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 actual data class User(
     @SerialName(value = "_id")
-    actual val id: String = "",
-    actual val userName: String = "",
+    actual val _id: String = "",
+    actual val username: String = "",
     actual val password: String = ""
 )
