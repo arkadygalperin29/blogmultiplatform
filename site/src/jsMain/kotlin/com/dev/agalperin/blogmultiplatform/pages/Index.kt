@@ -63,13 +63,6 @@ private fun GridCell(color: Color, row: Int, column: Int, width: Int? = null, he
     )
 }
 
-@Page
-@Composable
-fun HomePage() {
-    println("Hello world!")
-}
-
-
 //An example by library authors for tests
 
 //    PageLayout("Home") {
