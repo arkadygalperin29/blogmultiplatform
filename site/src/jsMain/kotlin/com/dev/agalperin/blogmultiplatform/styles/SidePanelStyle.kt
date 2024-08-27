@@ -1,6 +1,7 @@
 package com.dev.agalperin.blogmultiplatform.styles
 
 import com.dev.agalperin.blogmultiplatform.models.Theme
+import com.dev.agalperin.blogmultiplatform.util.Id
 import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.TransitionProperty
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -11,7 +12,7 @@ import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import org.jetbrains.compose.web.css.ms
 
 val NavigationItemStyle by ComponentStyle {
-    cssRule(suffix = " > #svgParent > #vectorIcon") {
+    cssRule(suffix = " > #${Id.svgParent} > #${Id.vectorIcon}") {
         Modifier
             .transition(
                 CSSTransition(
@@ -22,13 +23,13 @@ val NavigationItemStyle by ComponentStyle {
                 property("stroke", Theme.White.hex)
             }
     }
-    cssRule(suffix = ":hover > #svgParent > #vectorIcon") {
+    cssRule(suffix = ":hover > #${Id.svgParent} > #${Id.vectorIcon}") {
         Modifier
             .styleModifier {
                 property("stroke", Theme.Primary.hex)
             }
     }
-    cssRule(suffix = " > #navigationText") {
+    cssRule(suffix = " > #${Id.navigationText}") {
         Modifier
             .transition(
                 CSSTransition(
@@ -39,7 +40,7 @@ val NavigationItemStyle by ComponentStyle {
                 Theme.White.rgb
             )
     }
-    cssRule(suffix = ":hover > #navigationText") {
+    cssRule(suffix = ":hover > #${Id.navigationText}") {
         Modifier.color(
             Theme.Primary.rgb
         )

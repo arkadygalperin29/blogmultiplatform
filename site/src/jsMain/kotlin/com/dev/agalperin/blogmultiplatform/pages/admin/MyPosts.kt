@@ -14,14 +14,15 @@ import org.jetbrains.compose.web.css.px
 
 @Page
 @Composable
-fun HomePage() {
+fun MyPostsPage() {
     isUserLoggedIn {
-        HomeScreen()
+        MyPostsScreen()
     }
 }
 
+
 @Composable
-fun HomeScreen() {
+fun MyPostsScreen() {
     Box(
         modifier = Modifier.fillMaxSize().maxWidth(PAGE_WIDTH.px),
         contentAlignment = Alignment.TopStart
