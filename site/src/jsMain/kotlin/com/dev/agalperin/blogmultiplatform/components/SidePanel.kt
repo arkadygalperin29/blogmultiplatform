@@ -26,6 +26,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -93,8 +94,8 @@ fun NavigationItem(
     ) {
         VectorIcon(
             modifier = Modifier.margin(right = 10.px),
-            pathData = icon,
-            color = if (selected) Theme.Primary.hex else Theme.HalfWhite.hex
+            selected = selected,
+            pathData = icon
         )
         SpanText(
             modifier = Modifier
@@ -115,8 +116,8 @@ fun NavigationItem(
 @Composable
 fun VectorIcon(
     modifier: Modifier = Modifier,
+    selected: Boolean,
     pathData: String,
-    color: String
 ) {
     Svg(
         attrs = modifier
@@ -131,9 +132,14 @@ fun VectorIcon(
         Path(
             attrs = Modifier
                 .id("vectorIcon")
+                .thenIf(
+                    condition = selected,
+                    other = Modifier.styleModifier {
+                        property("stroke", Theme.Primary.hex)
+                    }
+                )
                 .toAttrs {
                 attr("d", pathData)
-                attr("stroke", color)
                 attr("stroke-width", "2")
                 attr("stroke-linecap", "round")
                 attr("stroke-linejoin", "round")
