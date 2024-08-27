@@ -24,7 +24,7 @@ fun HomeScreen() {
 fun HomePage() {
     Box(
         modifier = Modifier.fillMaxSize().maxWidth(PAGE_WIDTH.px),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.TopStart
     ) {
         SidePanel()
     }

@@ -2,6 +2,7 @@ package com.dev.agalperin.blogmultiplatform.components
 
 import androidx.compose.runtime.Composable
 import com.dev.agalperin.blogmultiplatform.models.Theme
+import com.dev.agalperin.blogmultiplatform.styles.NavigationItemStyle
 import com.dev.agalperin.blogmultiplatform.util.Constants.FONT_FAMILY
 import com.dev.agalperin.blogmultiplatform.util.Constants.SIDE_PANEL_WIDTH
 import com.dev.agalperin.blogmultiplatform.util.Res
@@ -18,6 +19,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.height
+import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -26,6 +28,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.px
@@ -81,7 +84,8 @@ fun NavigationItem(
     onClick: () -> Unit
 ) {
     Row(
-        modifier = modifier
+        modifier = NavigationItemStyle.toModifier()
+            .then(modifier)
             .cursor(Cursor.Pointer)
             .onClick { onClick() },
         verticalAlignment = Alignment.CenterVertically
@@ -108,13 +112,19 @@ fun VectorIcon(
     color: String
 ) {
     Svg(
-        attrs = modifier.width(24.px).height(24.px).toAttrs {
+        attrs = modifier
+            .id("svgParent")
+            .width(24.px)
+            .height(24.px)
+            .toAttrs {
             attr("viewbox", "0 0 24 24")
             attr("fill", "none")
         }
     ) {
         Path(
-            attrs = Modifier.toAttrs {
+            attrs = Modifier
+                .id("vectorIcon")
+                .toAttrs {
                 attr("d", pathData)
                 attr("stroke", color)
                 attr("stroke-width", "2")
