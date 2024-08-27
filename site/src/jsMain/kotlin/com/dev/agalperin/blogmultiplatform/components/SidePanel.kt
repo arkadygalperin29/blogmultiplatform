@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.dev.agalperin.blogmultiplatform.models.Theme
 import com.dev.agalperin.blogmultiplatform.navigation.Screen
 import com.dev.agalperin.blogmultiplatform.styles.NavigationItemStyle
+import com.dev.agalperin.blogmultiplatform.util.Constants.COLLAPSED_PANEL_HEIGHT
 import com.dev.agalperin.blogmultiplatform.util.Constants.FONT_FAMILY
 import com.dev.agalperin.blogmultiplatform.util.Constants.SIDE_PANEL_WIDTH
 import com.dev.agalperin.blogmultiplatform.util.Id
@@ -16,9 +17,11 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.height
@@ -34,14 +37,29 @@ import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.icons.fa.FaBars
+import com.varabyte.kobweb.silk.components.icons.fa.IconSize
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
 
 @Composable
-fun SidePanel() {
+fun SidePanel(onMenuClick: () -> Unit) {
+    val breakpont = rememberBreakpoint()
+    if (breakpont > Breakpoint.MD) {
+        SidePanelInternal()
+    } else {
+        CollapsedSidePanel(onMenuClick = onMenuClick)
+    }
+}
+
+@Composable
+private fun SidePanelInternal() {
+
     val context = rememberPageContext()
 
     val navItems = listOf(
@@ -174,6 +192,31 @@ fun VectorIcon(
                     attr("stroke-linecap", "round")
                     attr("stroke-linejoin", "round")
                 }
+        )
+    }
+}
+
+@Composable
+fun CollapsedSidePanel(onMenuClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(COLLAPSED_PANEL_HEIGHT.px)
+            .padding(leftRight = 24.px)
+            .backgroundColor(Theme.Secondary.rgb),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        FaBars(
+            modifier = Modifier.margin(right = 24.px)
+                .color(Colors.White)
+                .cursor(Cursor.Pointer)
+                .onClick { onMenuClick() },
+            size = IconSize.XL
+        )
+        Image(
+            modifier = Modifier.width(80.px),
+            src = Res.Image.logo,
+            description = "Logo Image"
         )
     }
 }

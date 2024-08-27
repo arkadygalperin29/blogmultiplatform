@@ -5,6 +5,7 @@ import com.dev.agalperin.blogmultiplatform.components.SidePanel
 import com.dev.agalperin.blogmultiplatform.util.Constants.PAGE_WIDTH
 import com.dev.agalperin.blogmultiplatform.util.isUserLoggedIn
 import com.varabyte.kobweb.compose.foundation.layout.Box
+import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
@@ -24,9 +25,13 @@ fun CreatePage() {
 @Composable
 fun CreateScreen() {
     Box(
-        modifier = Modifier.fillMaxSize().maxWidth(PAGE_WIDTH.px),
-        contentAlignment = Alignment.TopStart
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
-        SidePanel()
+        Column(
+            modifier = Modifier.fillMaxSize().maxWidth(PAGE_WIDTH.px)
+        ) {
+            SidePanel(onMenuClick = {})
+        }
     }
 }
