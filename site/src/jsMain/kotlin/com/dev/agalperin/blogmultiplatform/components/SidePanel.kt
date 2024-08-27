@@ -26,6 +26,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
+import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.style.toModifier
@@ -97,9 +98,15 @@ fun NavigationItem(
         )
         SpanText(
             modifier = Modifier
+                .id("navigationText")
                 .fontFamily(FONT_FAMILY)
                 .fontSize(16.px)
-                .color(if (selected) Theme.Primary.rgb else Theme.White.rgb),
+                .thenIf(
+                    condition = selected,
+                    lazyProduce = {
+                        Modifier.color(Theme.Primary.rgb)
+                    }
+                ),
             text = title
         )
     }
